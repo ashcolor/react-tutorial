@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import Board from "./components/Board";
 
 export default function Game() {
@@ -11,37 +10,37 @@ export default function Game() {
 
   const currentSquares = history[currentMove];
 
-  function handlePlay(nextSquares) {
+  function handlePlay(nextSquares: Array<string>) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
 
-  function jumpTo(nextMove) {
+  function jumpTo(nextMove: number) {
     setCurrentMove(nextMove);
   }
 
-  const moves = history.map((squares, move) => {
-    let description;
-    if (move > 0) {
-      description = "Go to move #" + move;
-    } else {
-      description = "Go to game start";
-    }
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
-  });
-
   return (
-    <div className="game">
+    <div className="container mx-auto">
+      <h1 className="text-4xl">チュートリアル: 三目並べ</h1>
+      <p>
+        <a href="https://react.dev/learn/tutorial-tic-tac-toe" target="_blank">
+          🔗
+        </a>
+      </p>
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{moves}</ol>
+        <ol>
+          {history.map((squares, move) => (
+            <li key={move}>
+              <button className="btn" onClick={() => jumpTo(move)}>
+                {move > 0 ? "Go to move #" + move : "Go to game start"}
+              </button>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );

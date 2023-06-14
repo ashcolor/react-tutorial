@@ -1,7 +1,12 @@
-export default function Square({ value, onSquareClick }) {
-  console.log(value);
+export default function Square({
+  value,
+  onSquareClick,
+}: {
+  value: string;
+  onSquareClick: () => void;
+}) {
   return (
-    <button className="square w-8 h-8 border-2" onClick={onSquareClick}>
+    <button className="border-2" onClick={onSquareClick}>
       {value}
     </button>
   );
