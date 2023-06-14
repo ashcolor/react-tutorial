@@ -14,12 +14,12 @@ export default function Game() {
   } = useTicTacToe();
 
   return (
-    <div className="grid grid-cols-2">
-      <div className="game-board">
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col place-items-center">
         <div className="text-xl">
           {winner
-            ? "Winner: " + winner
-            : "Next player: " + (xIsNext ? "X" : "O")}
+            ? "👑勝者: " + winner
+            : "次のプレイヤー: " + (xIsNext ? "❌" : "⭕")}
         </div>
         <Board
           xIsNext={xIsNext}
@@ -28,12 +28,13 @@ export default function Game() {
           isFinish={Boolean(winner)}
         />
       </div>
-      <div className="game-info">
-        <ol>
+      <div className="h-full p-4 border">
+        <p className="text-xl my-2">履歴</p>
+        <ol className="flex flex-col gap-2">
           {previousSquares.map((_, move) => (
             <li key={move}>
-              <button className="btn" onClick={() => setTurn(move)}>
-                {move > 0 ? "Go to move #" + move : "Go to game start"}
+              <button className="btn btn-sm" onClick={() => setTurn(move)}>
+                {"移動 #" + move}
               </button>
             </li>
           ))}
