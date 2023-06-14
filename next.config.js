@@ -1,4 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+const isProd = process.env.NODE_ENV === "production";
 
-module.exports = nextConfig
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  assetPrefix: isProd ? "https://ashcolor.github.io/react-tutorial" : "",
+  output: "export",
+};
+
+module.exports = nextConfig;
